@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    
+    form(action="/alumno/alta" method="post")
+        label(for="") Nombre 
+        input(type="text" name = 'nombre' required) 
+        label(for="") Apellido 
+        input(type="text" name = 'apellido' required)
+        label(for="") dni 
+        input(type="text" name = 'dni' required)
+        button(type="submit" ) Enviar

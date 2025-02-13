@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
 const sequelize = require('./config/db');
+const path = require('path');
 
 //rutas 
 const alumnoRouter = require('./router/alumnoRouter');
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
