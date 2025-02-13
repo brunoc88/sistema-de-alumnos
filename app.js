@@ -2,8 +2,18 @@ const express = require('express');
 const app = express();
 const sequelize = require('./config/db');
 
+//rutas 
+const alumnoRouter = require('./router/alumnoRouter');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
+
+app.use('/alumno',alumnoRouter);
+
 app.use('/',(req,res)=>{
-    res.send('Bienvenido de vuelta!')
+  res.send('Bienvenido de vuelta!')
 })
 
 // Sincronizar base de datos
