@@ -1,0 +1,32 @@
+extends ../layout 
+
+block content 
+
+    h2 Crear Materia
+    form(action="/materia/alta" method="post")  
+        label(for="") Nombre
+        input(type = "text" name = "nombre")
+        button(type = "submit") Enviar
+
+    h2 Listado de Materias 
+    table 
+        thead 
+            tr 
+                th Id
+                th Nombre
+                th Estado 
+                th Acciones
+        tbody 
+            if materias.length >0 
+                each m in materias 
+                    tr
+                        td #{m.idMateria}
+                        td #{m.nombre} 
+                        td #{m.estado}
+                        td 
+                            div
+                                form(action="")
+                                    button(type="submit") Actualizar 
+                                if m.estado == 1
+                                    form(action=`/materia/baja/${m.idMateria}?_method=PATCH`, method='POST')
+                                        button(type="submit") Desactivar 
