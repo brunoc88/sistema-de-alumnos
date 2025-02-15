@@ -3,13 +3,16 @@ extends ../layout
 block content 
 
     h2 Crear Materia
-    form(action="/materia/alta" method="post")  
-        label(for="") Nombre
-        input(type = "text" name = "nombre")
-        button(type = "submit") Enviar
+    div(class ="row")
+        div(class = "col-1")
+            form(action="/materia/alta" method="post") 
+                div(class="mb-3 mx-1") 
+                    label(for="nombre" class="form-label") Nombre
+                    input(type = "text" name = "nombre" class="form-control" required)
+                    button(type = "submit" class ="btn btn-primary") Enviar
 
-    h2 Listado de Materias 
-    table 
+    h1(class="text-center") Listado de Materias 
+    table#myTable.table.table-striped
         thead 
             tr 
                 th Id
@@ -22,11 +25,15 @@ block content
                     tr
                         td #{m.idMateria}
                         td #{m.nombre} 
-                        td #{m.estado}
+                        td #{m.estado?'activa':'inactiva'}
                         td 
-                            div
-                                form(action="")
-                                    button(type="submit") Actualizar 
+                            div(class="btn-group")
                                 if m.estado == 1
+                                    form(action=`/materia/editar/${m.idMateria}`, method= 'GET')
+                                        button(type="submit" class="btn btn-info") Editar
+
                                     form(action=`/materia/baja/${m.idMateria}?_method=PATCH`, method='POST')
-                                        button(type="submit") Desactivar 
+                                        button(type="submit" class="btn btn-warning") Desactivar 
+                                else 
+                                    form(action=`/materia/activar/${m.idMateria}?_method=PATCH`, method="post") 
+                                        button(type="submit" class="btn btn-success") Activar

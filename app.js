@@ -8,6 +8,9 @@ const methodOverride = require('method-override');
 const alumnoRouter = require('./router/alumnoRouter');
 const materiaRouter = require('./router/materiaRouter');
 
+// Configurar la carpeta pública
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -20,9 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/alumno',alumnoRouter);
 app.use('/materia',materiaRouter);
 
-app.use('/',(req,res)=>{
-  res.send('Bienvenido de vuelta!')
-})
+
 
 // Sincronizar base de datos
 sequelize.sync({})

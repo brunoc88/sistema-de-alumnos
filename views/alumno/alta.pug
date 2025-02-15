@@ -1,12 +1,26 @@
 extends ../layout
 
 block content
-    
-    form(action="/alumno/alta" method="post")
-        label(for="") Nombre 
-        input(type="text" name = 'nombre' required) 
-        label(for="") Apellido 
-        input(type="text" name = 'apellido' required)
-        label(for="") dni 
-        input(type="text" name = 'dni' required)
-        button(type="submit" ) Enviar
+    div(class ="container")
+        div(class="row justify-content-center")
+            h1(class = "text-center") Registrar Alumno
+            div(class="col-3")
+                form(action="/alumno/alta" method="post")
+                    div(class="mb-3")
+                        label(for="nombre" class="form-label") Nombre 
+                        input(type="text" name = 'nombre' required class="form-control") 
+                    div(class="mb-3")
+                        label(for="apellido" class="form-label") Apellido 
+                        input(type="text" name = 'apellido' required class="form-control")
+                    div(class="mb-3")
+                        label(for="dni" class="form-label") dni 
+                        input(type="text" name = 'dni' required class="form-control")
+                    div(class="mb-3")
+                        label(for="materiasSeleccionadas" class="form-label") Materias 
+                        select(multiple name="materiasSeleccionadas" class="form-select form-select-lg" required) 
+                            if materias && materias.length > 0
+                                each m in materias 
+                                    option(value="") #{m.nombre}
+                    div(class = "btn-group" )    
+                        button(type="submit" class="btn btn-primary") Enviar
+                        a(href="http://" class="btn btn-secondary")  Volver

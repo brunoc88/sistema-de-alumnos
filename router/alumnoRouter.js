@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const alumnoController = require('../controller/alumnoController');
 
-router.get('/crearAlumno',alumnoController.crearAlumno);
+router.get('/crear',alumnoController.crearAlumno);
 
 router.post('/alta',alumnoController.altaAlumno);
 

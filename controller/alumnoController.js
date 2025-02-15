@@ -1,8 +1,11 @@
 const Alumno = require('../models/alumno');
+const Materia = require('../models/materia');
 
 exports.crearAlumno = async(req,res)=>{
     try {
-        return res.status(200).render('alumno/alta')
+        //busco las materias y se la paso para que se registre
+        const materias = await Materia.findAll({where:{estado:true}});
+        return res.status(200).render('alumno/alta',{materias});
     } catch (error) {
         return res.send('Error: ', error);
     }
