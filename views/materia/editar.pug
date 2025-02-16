@@ -2,13 +2,21 @@ extends ../layout
 
 block content 
 
-   form(action=`/materia/actualizar/${materia.idMateria}?_method=PATCH`, method="post")
-    div(class ="mb-3")
-        label(for="nombre" class="form-label") Nombre 
-        input(type="text" class="form-control w-auto" name="nombre" value=`${materia.nombre}` required)
-    div(class="btn-group")
-        button(type="submit" class ="btn btn-primary") Enviar
-        a(href="/materia/index" class="btn btn-secondary") Volver 
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+    form(action=`/materia/actualizar/${materia.idMateria}?_method=PATCH`, method="post")
+        div(class ="mb-3")
+         label(for="nombre" class="form-label") Nombre 
+            input(type="text" class="form-control w-auto" name="nombre" value=`${materia.nombre}` required)
+        div(class="btn-group")
+            button(type="submit" class ="btn btn-primary") Enviar
+            a(href="/materia/index" class="btn btn-secondary") Volver 
  
 
              

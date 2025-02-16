@@ -3,15 +3,28 @@ extends ../layout
 block content 
 
     h2 Crear Materia
+
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+
     div(class ="row")
         div(class = "col-1")
             form(action="/materia/alta" method="post") 
                 div(class="mb-3 mx-1") 
                     label(for="nombre" class="form-label") Nombre
-                    input(type = "text" name = "nombre" class="form-control" required)
+                    input(id="nombre" type = "text" name = "nombre" class="form-control" required )
                     button(type = "submit" class ="btn btn-primary") Enviar
 
     h1(class="text-center") Listado de Materias 
+    if materias.length === 0
+            p(class="text-center") No hay Materias registrados.
+    else
     table#myTable.table.table-striped
         thead 
             tr 
@@ -25,7 +38,7 @@ block content
                     tr
                         td #{m.idMateria}
                         td #{m.nombre} 
-                        td #{m.estado?'activa':'inactiva'}
+                        td #{m.estado?'Activa':'Inactiva'}
                         td 
                             div(class="btn-group")
                                 if m.estado == 1
@@ -33,7 +46,8 @@ block content
                                         button(type="submit" class="btn btn-info") Editar
 
                                     form(action=`/materia/baja/${m.idMateria}?_method=PATCH`, method='POST')
-                                        button(type="submit" class="btn btn-warning") Desactivar 
+                                        button(type="submit" class="btn btn-danger") Desactivar 
                                 else 
                                     form(action=`/materia/activar/${m.idMateria}?_method=PATCH`, method="post") 
                                         button(type="submit" class="btn btn-success") Activar
+            

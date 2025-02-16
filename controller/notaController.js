@@ -1,0 +1,1 @@
+const Nota = require('../models/nota');

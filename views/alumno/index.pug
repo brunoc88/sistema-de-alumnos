@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+
+    a(href="/alumno/crear" class="btn btn-primary") Registrar Alumno
+
+    
+    h1(class="text-center") Lista de Alumnos
+
+    if alumnos.length === 0
+        p(class="text-center") No hay alumnos registrados.
+    else
+        table#myTable.table.table-striped
+            thead
+                tr
+                    th Id
+                    th Nombre
+                    th Apellido
+                    th DNI
+                    th Estado
+                    th Acciones
+            tbody
+                each alumno in alumnos
+                    tr
+                        td #{alumno.idAlumno}
+                        td #{alumno.nombre}
+                        td #{alumno.apellido}
+                        td #{alumno.dni}
+                        td #{alumno.estado? 'Activo':'Inactivo'}
+                        td
+                            div(class="btn-group")
+                                form(action=`/alumno/materias/${alumno.idAlumno}`, method= 'GET')
+                                    button(type="submit" class="btn btn-warning") Materias
+                                form(action=`/alumno/notas/${alumno.idAlumno}`, method= 'GET')
+                                        button(type="submit" class="btn btn-dark") Notas
+                                if alumno.estado == 1
+                                    form(action=`/alumno/editar/${alumno.idAlumno}`, method= 'GET')
+                                        button(type="submit" class="btn btn-info") Editar
+
+                                    form(action=`/alumno/baja/${alumno.idAlumno}?_method=PATCH`, method='POST')
+                                        button(type="submit" class="btn btn-danger") Desactivar 
+                                else 
+                                    form(action=`/alumno/activar/${alumno.idAlumno}?_method=PATCH`, method="post") 
+                                        button(type="submit" class="btn btn-success") Activar

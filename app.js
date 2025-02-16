@@ -3,10 +3,12 @@ const app = express();
 const sequelize = require('./config/db');
 const path = require('path');
 const methodOverride = require('method-override');
+const session = require('express-session');//middleware para mensajes
 
 //rutas 
 const alumnoRouter = require('./router/alumnoRouter');
 const materiaRouter = require('./router/materiaRouter');
+const notaRouter = require('./router/notaRouter');
 
 // Configurar la carpeta pública
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,11 +20,26 @@ app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(session({
+  secret: 'clave-secreta', // Cambia esta clave a algo único
+  resave: false,           // Evita guardar la sesión si no hubo cambios
+  saveUninitialized: true,  // Guarda sesiones nuevas aunque no tengan datos
+  cookie: { secure: false } // Si usas HTTPS, ponlo en true
+}));
+
+//limpiar mensajes
+app.use((req, res, next) => {
+  res.locals.message = req.session.message;
+  res.locals.errorMessage = req.session.errorMessage;
+  req.session.message = null;
+  req.session.errorMessage = null;
+  next();
+});
 
 
 app.use('/alumno',alumnoRouter);
 app.use('/materia',materiaRouter);
-
+app.use('/nota',notaRouter);
 
 
 // Sincronizar base de datos

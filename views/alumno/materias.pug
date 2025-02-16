@@ -1,0 +1,30 @@
+extends ../layout
+
+block content 
+
+    h1(class = "text-center") Lista de materias del alumno #{alumno.nombre} #{alumno.apellido}
+
+    if alumno.Materia.lentgh === 0 
+        p(class="text-center") No esta cursando ninguna Materia 
+    else 
+        table#myTable.table.table-striped
+            thead
+                tr
+                    th Id
+                    th Nombre
+                    th Estado
+                    th Acciones
+            tbody
+                each a in alumno.Materia
+                    tr
+                        td #{a.idMateria}
+                        td #{a.nombre}
+                        td #{a.estado? 'Activo':'Inactivo'}
+                        td
+                            div(class="btn-group")
+                                
+                                if a.estado == 1
+                                    form(action=`/alumno/editar/${a.idAlumno}`, method= 'GET')
+                                        button(type="submit" class="btn btn-info") Poner Nota
+
+                                

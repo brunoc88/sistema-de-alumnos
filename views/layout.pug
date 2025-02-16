@@ -14,7 +14,7 @@ html(lang="en")
         // DataTables JS
         script(src="https://cdn.datatables.net/2.1.8/js/dataTables.js") 
         // Estilo para las notificaciones
-        //link(rel='stylesheet', href='/css/notificaciones.css')  
+        link(rel='stylesheet', href='/css/notificaciones.css')  
         // link para usar iconos de Font Awezone
         link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet")
     body 
@@ -22,10 +22,11 @@ html(lang="en")
             nav
                 ul 
                     li 
-                        a(href="/alumno/crear") Alumno 
+                        a(href="/alumno/index") Alumno 
                     li
                         a(href="/materia/index") Materia 
-                    
+    // Lógica para las notificaciones
+    script(src='/js/notificaciones.js')               
     // Configuración del dataTable para las tablas
     script(src='/js/dataTableConfig.js')            
     block content 
