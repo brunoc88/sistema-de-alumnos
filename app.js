@@ -9,6 +9,7 @@ const session = require('express-session');//middleware para mensajes
 const alumnoRouter = require('./router/alumnoRouter');
 const materiaRouter = require('./router/materiaRouter');
 const notaRouter = require('./router/notaRouter');
+const usuarioRouter = require('./router/usuarioRouter');
 
 // Configurar la carpeta pública
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use('/alumno',alumnoRouter);
 app.use('/materia',materiaRouter);
 app.use('/nota',notaRouter);
+app.use('/usuario',usuarioRouter);
 
 
 // Sincronizar base de datos

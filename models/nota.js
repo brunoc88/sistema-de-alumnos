@@ -2,6 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Alumno = require('./alumno');
 const Materia = require('./materia');
+const Usuario = require('./usuario');
+
 
 const Nota = sequelize.define('Nota',{
     idNota:{
@@ -42,5 +44,16 @@ Alumno.hasMany(Nota,{
     foreignKey:'id_alumno',
     sourceKey:'idAlumno'
 })
+
+Usuario.hasMany(Nota,{
+    foreignKey: 'id_usuario',
+    sourceKey: 'idUsuario'
+})
+
+Nota.belongsTo(Usuario,{
+    foreignKey: 'id_usuario',
+    targetKey: 'idUsuario'
+})
+
 
 module.exports = Nota;
