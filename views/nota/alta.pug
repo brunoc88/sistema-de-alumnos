@@ -1,0 +1,45 @@
+extends ../layout 
+
+block content 
+
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+    h1(class = "text-center")
+
+    .containter 
+    .row.justify-content-center 
+        .col-md-3
+            form(action="/nota/alta", method="post")
+                .mb-3 
+                    label(for="alumno") Alumno:
+                    input#alumno.form-control(type="text", value=`${alumno.nombre} ${alumno.apellido}`, readonly)
+        
+                .mb-3
+                    label(for="materia") Materia:
+                    input#materia.form-control(type="text", value=`${materia.nombre}`, readonly)
+                
+                .mb-3 
+                    label(for="rol") Calificacion:
+                    select(name="rol" class="form-control")
+                        option(value="1") 1
+                        option(value="2") 2
+                        option(value="3") 3
+                        option(value="4") 4
+                        option(value="5") 5
+                        option(value="6") 6
+                        option(value="7") 7
+                        option(value="8") 8
+                        option(value="9") 9
+                        option(value="10") 10
+                 
+                input(type="hidden", name="idAlumno", value=`${alumno.idAlumno}`)
+                input(type="hidden", name="idMateria", value=`${materia.idMateria}`) 
+                .btn-group.d-flex.justify-content-between 
+                    button(type="submit" class="btn btn-primary") Enviar
+                    a(href="/alumno/index" class="btn btn-secondary") Volver

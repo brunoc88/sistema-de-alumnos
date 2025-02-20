@@ -11,6 +11,7 @@ const materiaRouter = require('./router/materiaRouter');
 const notaRouter = require('./router/notaRouter');
 const usuarioRouter = require('./router/usuarioRouter');
 
+
 // Configurar la carpeta pública
 app.use(express.static(path.join(__dirname, 'public')));
 

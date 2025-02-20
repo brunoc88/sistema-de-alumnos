@@ -1,0 +1,40 @@
+extends ../layout
+
+block content 
+
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+    h1(class="text-center") Alta de Usuario 
+    .containter 
+    .row.justify-content-center 
+        .col-md-3
+            form(action="/usuario/alta", method="post")
+                .mb-3 
+                    label(for="nombre") Nombre:
+                    input(type="text" class="form-control" name="nombre" required)
+                .mb-3 
+                    label(for="apellido") Apellido:
+                    input(type="text" class="form-control" name="apellido" required)
+                .mb-3 
+                    label(for="email") Email:
+                    input(type="email" class="form-control" name="email" required)
+                .mb-3 
+                    label(for="dni") Dni:
+                    input(type="text" class="form-control" name="dni" required)
+                .mb-3 
+                    label(for="password") Password: 
+                    input(type="password" class="form-control" name="password" required)
+                .mb-3 
+                    label(for="rol") Rol:
+                    select(name="rol" class="form-control")
+                        option(value="Admin") Admin
+                        option(value="Estudiante") Estudiante  
+                .btn-group.d-flex.justify-content-between 
+                    button(type="submit" class="btn btn-primary") Enviar
+                    a(href="/usuario/index" class="btn btn-secondary") Volver

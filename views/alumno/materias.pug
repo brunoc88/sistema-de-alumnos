@@ -24,7 +24,7 @@ block content
                             div(class="btn-group")
                                 
                                 if a.estado == 1
-                                    form(action=`/alumno/editar/${a.idAlumno}`, method= 'GET')
+                                    form(action=`/nota/crear/${alumno.idAlumno}/${a.idMateria}`, method= 'GET')
                                         button(type="submit" class="btn btn-info") Poner Nota
 
                                 

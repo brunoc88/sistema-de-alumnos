@@ -1,0 +1,52 @@
+extends ../layout 
+
+block content
+
+
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+
+    a(href="/usuario/crear" class="btn btn-primary") Registrar Usuario
+
+    
+    h1(class="text-center") Lista de Usuarios
+
+    if usuarios.length === 0
+        p(class="text-center") No hay usuarios registrados.
+    else
+        table#myTable.table.table-striped
+            thead
+                tr
+                    th Id
+                    th Nombre
+                    th Apellido
+                    th DNI
+                    th Rol
+                    th Estado
+                    th Acciones
+            tbody
+                each u in usuarios
+                    tr
+                        td #{u.idUsuario}
+                        td #{u.nombre}
+                        td #{u.apellido}
+                        td #{u.dni}
+                        td #{u.rol}
+                        td #{u.estado? 'Activo':'Inactivo'}
+                        td
+                            div(class="btn-group")
+                                if u.estado == 1
+                                    form(action=`/usuario/editar/${u.idUsuario}`, method= 'GET')
+                                        button(type="submit" class="btn btn-info") Editar
+
+                                    form(action=`/usuario/baja/${u.idUsuario}?_method=PATCH`, method='POST')
+                                        button(type="submit" class="btn btn-danger") Desactivar 
+                                else 
+                                    form(action=`/usuario/activar/${u.idUsuario}?_method=PATCH`, method="post") 
+                                        button(type="submit" class="btn btn-success") Activar
