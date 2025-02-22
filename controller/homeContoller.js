@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
         }
 
         // Comparar contraseñas
-        const validPassword = await bcrypt.compare(data.password, user.password); // Corregí la variable aquí
+        const validPassword = await bcrypt.compare(data.password, user.password); 
         if (!validPassword) {
             return res.status(404).render('home/login', {
                 errorMessage: 'Usuario Invalido o inexistente'

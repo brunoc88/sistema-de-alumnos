@@ -2,6 +2,14 @@ extends ../layout
 
 block content 
 
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
     h1(class = "text-center") Lista de materias del alumno #{alumno.nombre} #{alumno.apellido}
 
     if alumno.Materia.lentgh === 0 

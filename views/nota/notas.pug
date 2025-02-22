@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+    if !materias || materias.length === 0
+        h1(class="text-center text-danger") No cuenta con notas!
+    else
+        div.container
+            h2(class="text-center mt-4 mb-3 text-primary") Notas del Alumno/a #{alumno.nombre} #{alumno.apellido}
+            table(class="table table-striped table-bordered text-center shadow-lg")
+                thead(class="table-dark text-white")
+                    tr 
+                        th Materia 
+                        th C1 
+                        th C2 
+                        th C3 
+                        th Promedio
+                tbody 
+                    each materia in materias
+                        tr
+                            td(class="fw-bold")= materia.nombre
+                            each calificacion in materia.calificaciones
+                                td= calificacion !== null ? calificacion : '-'
+                            td(class="fw-bold text-success")= materia.promedio

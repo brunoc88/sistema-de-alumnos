@@ -29,6 +29,15 @@ exports.altaUsuario = async (req, res) => {
             })
         }
 
+        //buscar si ya existe alguien registrado con ese mail 
+        const buscarUsuarioPorMail = await Usuario.findOne({ where: { email: data.email } });
+        if (buscarUsuarioPorMail) {
+            return res.status(409).render('usuario/altaUsuario', {
+                errorMessage: 'Ya existe un usuario con ese email!',
+                usuario: data
+            })
+        }
+
         // Generar salt y hashear la contraseña
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(data.password, salt);

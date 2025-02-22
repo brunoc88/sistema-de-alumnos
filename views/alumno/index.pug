@@ -39,7 +39,7 @@ block content
                             div(class="btn-group")
                                 form(action=`/alumno/materias/${alumno.idAlumno}`, method= 'GET')
                                     button(type="submit" class="btn btn-warning") Materias
-                                form(action=`/alumno/notas/${alumno.idAlumno}`, method= 'GET')
+                                form(action=`/nota/notasDeAlumno/${alumno.idAlumno}`, method= 'GET')
                                         button(type="submit" class="btn btn-dark") Notas
                                 if alumno.estado == 1
                                     form(action=`/alumno/editar/${alumno.idAlumno}`, method= 'GET')
