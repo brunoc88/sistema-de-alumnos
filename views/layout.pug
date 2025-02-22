@@ -2,7 +2,7 @@ doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
         // Bootstrap CSS
         link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
         // DataTables CSS
@@ -15,20 +15,27 @@ html(lang="en")
         script(src="https://cdn.datatables.net/2.1.8/js/dataTables.js") 
         // Estilo para las notificaciones
         link(rel='stylesheet', href='/css/notificaciones.css')  
-        // link para usar iconos de Font Awezone
+        // link para usar iconos de Font Awesome
         link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet")
-    body 
-        div
-            nav
-                ul 
-                    li 
-                        a(href="/alumno/index") Alumno 
-                    li
-                        a(href="/materia/index") Materia 
-                    li
-                        a(href="/usuario/index") Usuario 
-    // Lógica para las notificaciones
-    script(src='/js/notificaciones.js')               
-    // Configuración del dataTable para las tablas
-    script(src='/js/dataTableConfig.js')            
-    block content 
+    body
+        // Barra de navegación con Bootstrap
+        nav(class="navbar navbar-expand-lg navbar-light bg-light")
+            a(class="navbar-brand", href="/") Sistema de Alumnos
+            button(class="navbar-toggler", type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+                span(class="navbar-toggler-icon")
+            div(class="collapse navbar-collapse", id="navbarNav")
+                ul(class="navbar-nav")
+                    li(class="nav-item")
+                        a(class="nav-link", href="/alumno/index") Alumno
+                    li(class="nav-item")
+                        a(class="nav-link", href="/materia/index") Materia
+                    li(class="nav-item")
+                        a(class="nav-link", href="/usuario/index") Usuario
+                    li(class="nav-item")
+                        a(class="nav-link", href="/home/logout") Salir
+
+        // Lógica para las notificaciones
+        script(src='/js/notificaciones.js')               
+        // Configuración del dataTable para las tablas
+        script(src='/js/dataTableConfig.js')            
+        block content

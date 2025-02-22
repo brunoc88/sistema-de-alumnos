@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js")
+        link(rel='stylesheet', href='/css/notificaciones.css')  
+        title Login
+    body 
+
+        if message
+            #notification.alert.alert-success
+                | #{message}
+
+        if errorMessage
+            #notification.alert.alert-danger
+                | #{errorMessage}
+
+        .container.d-flex.align-items-center.justify-content-center.min-vh-100
+            .card
+                .card-body
+                    .row.justify-content-center
+                        h2(class="text-center") Iniciar Sesión
+                        .col-6 
+                            form(action="/home/login", method="post") 
+                                .mb-3 
+                                    label(for="user" class="form-label") eMail: 
+                                    input(type="text" name="email" class="form-control" required)
+                                .mb-3 
+                                    label(for="password" class="form-label") password: 
+                                    input(type="password" name="password" class="form-control" required)  
+                                .mb-3.text-center
+                                    button(class="btn btn-primary" type="submit") Login
+
+    script(src='/js/notificaciones.js')

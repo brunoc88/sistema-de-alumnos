@@ -9,7 +9,7 @@ exports.crearNota = async(req,res)=>{
 
         const alumno = await Alumno.findByPk(idAlumno);
         const materia = await Materia.findByPk(idMateria);
-
+        
         return res.status(200).render('nota/alta',{alumno,materia});
     } catch (error) {
         return res.status(500).json(error)
