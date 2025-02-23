@@ -1,0 +1,11 @@
+
+bcrypt: https://www.npmjs.com/package/bcrypt
+cookie-parser: https://www.npmjs.com/package/cookie-parser
+express: https://expressjs.com/
+express-session: https://www.npmjs.com/package/express-session
+jsonwebtoken: https://www.npmjs.com/package/jsonwebtoken
+method-override: https://www.npmjs.com/package/method-override
+mysql2: https://www.npmjs.com/package/mysql2
+nodemon: https://www.npmjs.com/package/nodemon
+pug: https://pugjs.org/api/getting-started.html
+sequelize: https://sequelize.org/

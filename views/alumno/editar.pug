@@ -13,7 +13,7 @@ block content
         div(class="row justify-content-center")
             h1(class="text-center") Editar Alumno
             div(class="col-3")
-                form(action=`/alumno/actualizar/${alumno.idAlumno}?method_PUT` method="post")
+                form(action=`/alumno/actualizar/${alumno.idAlumno}?_method=PUT` ,method="post")
                     div(class="mb-3")
                         label(for="nombre" class="form-label") Nombre:
                         input(type="text" name='nombre' required class="form-control" value=`${alumno ? alumno.nombre : ''}`)

@@ -1,0 +1,11 @@
+USUARIOS:
+
+-Admin
+
+email: bruno@gmail.com 
+pass: 123
+
+-Estudiante
+
+email: belen@gmail.com 
+pass: 123

@@ -30,9 +30,11 @@ block content
                         td #{a.estado? 'Activo':'Inactivo'}
                         td
                             div(class="btn-group")
-                                
+                                form(action=`/nota/notasDeAlumno/${alumno.idAlumno}`, method= 'GET')
+                                        button(type="submit" class="btn btn-dark") Ver Notas
                                 if alumno.estado == 1
                                     form(action=`/nota/crear/${alumno.idAlumno}/${a.idMateria}`, method= 'GET')
                                         button(type="submit" class="btn btn-info") Poner Nota
+                            
 
                                 
