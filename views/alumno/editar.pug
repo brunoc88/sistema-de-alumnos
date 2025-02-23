@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+    if message
+        #notification.alert.alert-success
+            | #{message}
+
+    if errorMessage
+        #notification.alert.alert-danger
+            | #{errorMessage}
+
+    div(class="container")
+        div(class="row justify-content-center")
+            h1(class="text-center") Editar Alumno
+            div(class="col-3")
+                form(action=`/alumno/actualizar/${alumno.idAlumno}?method_PUT` method="post")
+                    div(class="mb-3")
+                        label(for="nombre" class="form-label") Nombre:
+                        input(type="text" name='nombre' required class="form-control" value=`${alumno ? alumno.nombre : ''}`)
+                    div(class="mb-3")
+                        label(for="apellido" class="form-label") Apellido:
+                        input(type="text" name='apellido' required class="form-control" value=`${alumno ? alumno.apellido : ''}`)
+                    div(class="mb-3")
+                        label(for="dni" class="form-label") Dni:
+                        input(type="text" name='dni' required class="form-control" value=`${alumno ? alumno.dni : ''}`)
+                    div(class="mb-3")
+                        label(for="materiasSeleccionadas" class="form-label") Materias
+                        select(multiple name="materiasSeleccionadas" class="form-select form-select-lg" required)
+                            if materias && materias.length > 0
+                                each materia in materias
+                                    option(value=`${materia.idMateria}` selected=(materiasSeleccionadas && materiasSeleccionadas.some(m => m.idMateria == materia.idMateria))) #{materia.nombre}
+                            else
+                                option(value="" disabled) No hay Materias disponibles
+
+                    div(class="btn-group")
+                        button(type="submit" class="btn btn-primary") Enviar
+                        a(href="/alumno/index" class="btn btn-secondary") Volver

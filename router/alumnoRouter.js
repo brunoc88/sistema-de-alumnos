@@ -1,17 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const alumnoController = require('../controller/alumnoController');
+const {verifyToken, verifyRole} = require('../middlewares/permisos');
 
-router.get('/index',alumnoController.indexAlumno);
+router.get('/index',verifyToken,verifyRole('Admin'),alumnoController.indexAlumno);
 
-router.get('/crear',alumnoController.crearAlumno);
+router.get('/crear',verifyToken,verifyRole('Admin'),alumnoController.crearAlumno);
 
-router.get('/materias/:id',alumnoController.alumnoMaterias);
+router.get('/materias/:id',verifyToken,verifyRole('Admin'),alumnoController.alumnoMaterias);
 
-router.post('/alta',alumnoController.altaAlumno);
+router.post('/alta',verifyToken,verifyRole('Admin'),alumnoController.altaAlumno);
 
-router.patch('/baja/:id',alumnoController.bajaAlumno);
+router.patch('/baja/:id',verifyToken,verifyRole('Admin'),alumnoController.bajaAlumno);
 
-router.patch('/activar/:id',alumnoController.activarAlumno);
+router.patch('/activar/:id',verifyToken,verifyRole('Admin'),alumnoController.activarAlumno);
+
+router.get('/editar/:id',verifyToken,verifyRole('Admin'),alumnoController.editarAlumno);
+
+router.put('/actualizar/:id',verifyToken,verifyRole('Admin'),alumnoController.actualizar);
 
 module.exports = router;

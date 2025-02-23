@@ -88,7 +88,13 @@ exports.notasDeAlumno = async (req, res) => {
 
         //paso datos del alumno
         const alumno = await Alumno.findByPk(idAlumno);
-        return res.status(200).render('nota/notas', { materias, alumno });
+        if(req.user.rol === "Admin"){
+            return res.status(200).render('nota/notas', { materias, alumno });
+        }
+        if(req.user.rol === "Estudiante"){
+            return res.status(200).render('alumno/misNotas', { materias, alumno });
+        }
+        
     } catch (error) {
         return res.status(500).json(error);
     }

@@ -57,7 +57,7 @@ exports.altaAlumno = async (req, res) => {
 
         if (materiasSeleccionadas && materiasSeleccionadas.length > 0) {
             for (let idMateria of materiasSeleccionadas) {
-                //console.log('id:',idMateria)
+                console.log('id:',idMateria)
                 await nuevoAlumno.addMateria(idMateria);
             }
         }
@@ -111,5 +111,28 @@ exports.alumnoMaterias = async(req,res)=>{
         return res.status(200).render('alumno/materias',{alumno});
     } catch (error) {
         return res.json(error);
+    }
+}
+
+exports.editarAlumno = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const alumno = await Alumno.findByPk(id);
+        //busco el metodo para obtener la materias que se habian seleccionado
+        //console.log("METODO",Object.keys(alumno.__proto__));
+        const materiasSeleccionadas = await alumno.getMateria();  // Esto obtiene las materias asociadas
+        //console.log("materias del alumno",materiasSeleccionadas);
+        const materias = await Materia.findAll();
+        return res.status(200).render('alumno/editar',{alumno, materiasSeleccionadas, materias}); 
+    } catch (error) {
+        return res.json(error);
+    }
+}
+
+exports.actualizar = async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
     }
 }

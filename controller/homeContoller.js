@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');//para encriptar
-const jwt = require('jsonwebtoken')//para trabajar con token
+const jwt = require('jsonwebtoken');//para trabajar con token
+const Alumno = require('../models/alumno');
 
 exports.vistaLogin = async (req, res) => {
     try {
@@ -69,10 +70,16 @@ exports.login = async (req, res) => {
             maxAge: 1000 * 60 * 60 // 1 hora
         });
 
-        return res.status(200).redirect('/home/index');
-
+        if(user.rol === "Admin"){
+            return res.status(200).redirect('/home/index');
+        }
+        if(user.rol === "Estudiante"){
+            const alumno = await Alumno.findOne({ where: { dni: user.dni } });
+            return res.status(200).redirect(`/nota/misNotas/${alumno.idAlumno}`);
+        }
+        
     } catch (error) {
-        return res.status(500).json({ error: error.message }); // Cambié la forma de responder al error
+        return res.status(500).json({ error: error.message }); 
     }
 }
 

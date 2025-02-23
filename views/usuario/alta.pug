@@ -17,23 +17,23 @@ block content
             form(action="/usuario/alta", method="post")
                 .mb-3 
                     label(for="nombre") Nombre:
-                    input(type="text" class="form-control" name="nombre" required)
+                    input(type="text" class="form-control" value = (usuario? usuario.nombre : '') name="nombre" required)
                 .mb-3 
                     label(for="apellido") Apellido:
-                    input(type="text" class="form-control" name="apellido" required)
+                    input(type="text" class="form-control" value = (usuario? usuario.apellido: '') name="apellido" required)
                 .mb-3 
                     label(for="email") Email:
-                    input(type="email" class="form-control" name="email" required)
+                    input(type="email" class="form-control" value = (usuario? usuario.email: '') name="email" required)
                 .mb-3 
                     label(for="dni") Dni:
-                    input(type="text" class="form-control" name="dni" required)
+                    input(type="text" class="form-control" value = (usuario? usuario.dni: '') name="dni" required)
                 .mb-3 
                     label(for="password") Password: 
-                    input(type="password" class="form-control" name="password" required)
+                    input(type="password" class="form-control" value = (usuario? usuario.password: '') name="password" required)
                 .mb-3 
                     label(for="rol") Rol:
-                    select(name="rol" class="form-control")
-                        option(value="Admin") Admin
+                    select(name="rol" class="form-control" value = (usuario? usuario.rol: ''))
+                        option(value="Admin" ) Admin
                         option(value="Estudiante") Estudiante  
                 .btn-group.d-flex.justify-content-between 
                     button(type="submit" class="btn btn-primary") Enviar

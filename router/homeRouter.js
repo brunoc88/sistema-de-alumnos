@@ -7,7 +7,7 @@ router.post('/login',homeController.login);
 
 router.get('/login',homeController.vistaLogin);
 
-router.get('/index',verifyToken,homeController.vistaIndex);
+router.get('/index',verifyToken,verifyRole('Admin'),homeController.vistaIndex);
 
 router.get('/logout',homeController.logout);
 
