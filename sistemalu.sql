@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2025 a las 17:45:40
+-- Tiempo de generación: 01-03-2025 a las 13:45:38
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -40,7 +40,7 @@ CREATE TABLE `alumno` (
 --
 
 INSERT INTO `alumno` (`idAlumno`, `nombre`, `apellido`, `dni`, `estado`) VALUES
-(1, 'Thiago ', 'Gutierrez ', '012', 1),
+(1, 'Thiago Uriel', 'Gutierrez Cerutti', '012', 1),
 (2, 'Pedro', 'Rodriguez', '003', 1),
 (3, 'Leangro', 'Rodriguez', '005', 1),
 (4, 'Pablo', 'Torres', '006', 1),
@@ -48,8 +48,10 @@ INSERT INTO `alumno` (`idAlumno`, `nombre`, `apellido`, `dni`, `estado`) VALUES
 (6, 'Gabriela', 'Fernandez', '008', 1),
 (7, 'Belen', 'Rosales', '009', 1),
 (8, 'Rodrigo', 'Lopez', '010', 1),
-(9, 'Ramon', 'Avila', '111', 1),
-(10, 'Florencia', 'Franco', '123', 1);
+(9, 'Ramon', 'Salazar', '111', 1),
+(10, 'Florencia', 'Franco', '123', 1),
+(11, 'Norma', 'Coria', '040', 1),
+(12, 'Emanuel Higado', 'Hernandez', '014', 1);
 
 -- --------------------------------------------------------
 
@@ -68,6 +70,7 @@ CREATE TABLE `alumno-materia` (
 
 INSERT INTO `alumno-materia` (`idAlufk`, `idMatfk`) VALUES
 (1, 1),
+(1, 2),
 (2, 2),
 (3, 1),
 (4, 2),
@@ -78,7 +81,13 @@ INSERT INTO `alumno-materia` (`idAlufk`, `idMatfk`) VALUES
 (7, 2),
 (8, 2),
 (9, 1),
-(10, 3);
+(9, 2),
+(9, 3),
+(10, 3),
+(11, 2),
+(12, 1),
+(12, 2),
+(12, 3);
 
 -- --------------------------------------------------------
 
@@ -131,7 +140,8 @@ INSERT INTO `nota` (`idNota`, `calificacion`, `fecha`, `id_materia`, `id_alumno`
 (8, 4, '2025-02-22', 1, 9, 3),
 (9, 5, '2025-02-22', 1, 9, 3),
 (10, 7, '2025-02-22', 1, 9, 3),
-(11, 7, '2025-02-23', 2, 4, 3);
+(11, 7, '2025-02-23', 2, 4, 3),
+(12, 7, '2025-03-01', 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -156,7 +166,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `email`, `password`, `dni`, `rol`, `estado`) VALUES
 (3, 'Bruno', 'Cerutti', 'bruno@gmail.com', '$2b$10$p40EthUYHnXlWcrik1YOG.IQ.0vVqEWLUeeYLdrIzXIiEJIPGqfvC', '001', 'Admin', 1),
-(5, 'Belen ', 'Rosas', 'belen@gmail.com', '$2b$10$gmqluBA5yrVQQ6TfRZ7cEu9lIPljR7aNwNAQdGi8cln3oOv8Xtqa.', '009', 'Estudiante', 1);
+(5, 'Belen ', 'Rosas', 'belen@gmail.com', '$2b$10$gmqluBA5yrVQQ6TfRZ7cEu9lIPljR7aNwNAQdGi8cln3oOv8Xtqa.', '009', 'Estudiante', 1),
+(6, 'Emanuel Higado', 'Hernandez', 'hiro@gmail.com', '$2b$10$yxI3ppvcezI62BEpxwzV8ugQgkouKGngcxeIb7rjpXX04cnVn2F.G', '014', 'Estudiante', 1);
 
 --
 -- Índices para tablas volcadas
@@ -207,7 +218,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `materia`
@@ -219,13 +230,13 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `idNota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idNota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
