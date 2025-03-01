@@ -53,3 +53,6 @@ Almacenamiento del Token: El token se guarda en una cookie usando cookie-parser 
 Verificación de Token: Se implementa una función verifyToken en el middleware para asegurarse de que el usuario esté autenticado en rutas protegidas.
 Verificación de Rol: La función verifyRole se utiliza para asegurarse de que el usuario tenga los permisos necesarios para acceder a ciertas rutas (por ejemplo, solo el admin puede acceder a rutas de gestión de usuarios).
 
+ADVERTENCIA!!
+
+siempre el estudiante debe estar inscripto como alumno antes de pedir una cuenta de usuario.

@@ -1,10 +1,10 @@
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');//para encriptar clave
 
-exports.index = async(req,res)=>{
+exports.index = async (req, res) => {
     try {
         const usuarios = await Usuario.findAll();
-        return res.status(200).render('usuario/index',{usuarios});
+        return res.status(200).render('usuario/index', { usuarios });
     } catch (error) {
         return res.status(500).json(error);
     }
@@ -58,10 +58,10 @@ exports.altaUsuario = async (req, res) => {
     }
 }
 
-exports.bajaUsuario = async(req,res)=>{
+exports.bajaUsuario = async (req, res) => {
     try {
         const id = req.params.id;
-        await Usuario.update({estado:false},{where:{idUsuario:id}});
+        await Usuario.update({ estado: false }, { where: { idUsuario: id } });
         req.session.message = `Usuario desactivado con exito!`;
         return res.status(200).redirect('/usuario/index');
     } catch (error) {
@@ -69,10 +69,10 @@ exports.bajaUsuario = async(req,res)=>{
     }
 }
 
-exports.activarUsuario = async(req,res)=>{
+exports.activarUsuario = async (req, res) => {
     try {
         const id = req.params.id;
-        await Usuario.update({estado:true},{where:{idUsuario:id}});
+        await Usuario.update({ estado: true }, { where: { idUsuario: id } });
         req.session.message = `Usuario activado con exito!`;
         return res.status(200).redirect('/usuario/index');
     } catch (error) {
@@ -80,11 +80,11 @@ exports.activarUsuario = async(req,res)=>{
     }
 }
 
-exports.editar = async(req,res)=>{
+exports.editar = async (req, res) => {
     try {
         const id = req.params.id;
         const usuario = await Usuario.findByPk(id);
-        return res.status(200).render('usuario/editar',{usuario})
+        return res.status(200).render('usuario/editar', { usuario })
 
     } catch (error) {
         return res.json(error);
@@ -102,14 +102,37 @@ exports.actualizar = async (req, res) => {
         // Comparar si los datos han cambiado
         const mismaClave = data.password ? await bcrypt.compare(data.password, usuario.password) : true;
 
-        if (
-            data.nombre === usuario.nombre &&
-            data.apellido === usuario.apellido &&
-            data.email === usuario.email &&
-            mismaClave &&
-            data.rol === usuario.rol
-        ) {
-            return res.render('usuario/editar', { usuario, errorMessage: 'No hay cambios para actualizar' });
+        const sinCambios = usuario.nombre.trim().toLowerCase() === data.nombre.trim().toLowerCase() &&
+        usuario.apellido.trim().toLowerCase() === data.apellido.trim().toLowerCase() &&
+        usuario.email.trim().toLowerCase() === data.email.trim().toLowerCase() &&
+        usuario.rol.trim().toLowerCase() === data.rol.trim().toLowerCase() &&
+        usuario.dni.trim().toLowerCase() === data.dni.trim().toLowerCase() &&
+        mismaClave;
+
+        if(usuario.dni.trim().toLowerCase() !== data.dni.trim().toLowerCase()){
+            const dniDisponible = await Usuario.findOne({where:{dni:data.dni}})
+            if(dniDisponible){
+                return res.status(400).render('usuario/editar', {
+                    errorMessage: 'dni no disponible',
+                    usuario
+                });
+            }
+        }
+
+        if(usuario.email.trim().toLowerCase() !== data.email.trim().toLowerCase()){
+            const emailDisponible = await Usuario.findOne({where:{email:data.email}})
+            if(emailDisponible){
+                return res.status(400).render('usuario/editar', {
+                    errorMessage: 'email no disponible',
+                    usuario
+                });
+            }
+        }
+        if(sinCambios){
+            return res.status(400).render('usuario/editar', {
+                errorMessage: 'No se realizaron cambios en el usuario.',
+                usuario
+            });
         }
 
         // Si la contraseña ha cambiado, encriptarla antes de guardar
@@ -125,8 +148,9 @@ exports.actualizar = async (req, res) => {
             email: data.email,
             password: nuevaClave, // Solo actualiza la contraseña si se ha proporcionado
             rol: data.rol
-        },{where:{idUsuario:id}});
+        }, { where: { idUsuario: id } });
 
+        req.session.message = `Usuario actualizado!`;
         return res.redirect('/usuario/index');
 
     } catch (error) {

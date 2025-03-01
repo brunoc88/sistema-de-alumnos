@@ -135,10 +135,13 @@ exports.actualizar = async (req, res) => {
         const data = req.body;
         const alumno = await Alumno.findByPk(id, { include: Materia });
         const materias = await Materia.findAll({ where: { estado: true } });
+        const dniDisponible = await Alumno.findOne({where:{dni:data.dni}});
 
         if (!alumno) {
             return res.status(404).json({ error: "Alumno no encontrado" });
         }
+
+      
 
         // Convertir materiasSeleccionadas en array si es un solo valor
         const materiasNuevas = Array.isArray(data.materiasSeleccionadas)
@@ -147,10 +150,24 @@ exports.actualizar = async (req, res) => {
 
         // Obtener materias actuales del alumno
         const materiasSeleccionadas = await alumno.getMateria();
+
+        
+        if(data.dni !== alumno.dni){
+            if(dniDisponible){
+                return res.render('alumno/editar', {
+                    errorMessage: 'dni no disponible',
+                    alumno,
+                    materias,
+                    materiasSeleccionadas
+                });
+            }
+        }
         const materiasActuales = materiasSeleccionadas.map(m => m.idMateria).sort();
 
         // Comparar si las materias seleccionadas son iguales a las actuales
         const mismasMaterias = JSON.stringify(materiasActuales) === JSON.stringify(materiasNuevas);
+
+       
 
         // Comparar datos personales del alumno
         const sinCambios = 
