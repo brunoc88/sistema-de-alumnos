@@ -1,4 +1,4 @@
-Sistema de Alumnos
+#Sistema de Alumnos
 Descripción
 Sistema básico de gestión de alumnos con dos tipos de usuarios: Admin y Estudiante.
 
